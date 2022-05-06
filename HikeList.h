@@ -12,40 +12,48 @@
 #ifndef HIKELIST_H
 #define HIKELIST_H
 
+#include "Hike.h"
 #include <string>
 #include <iostream>
+#include <iomanip>
 #include <map>
 
 class HikeList : public Hike
 {
+    // Overloaded less operator
+    friend bool operator<(const Hike& firstObj, const Hike& secondObj);
+
 public:
-	HikeList( );
-		// Default constructor
+	// Default constructor
+    HikeList( );
 
-	void addHike(const Hike& myHike, double newPrice);
+	// Adding Hike functions
+    void addHike(const Hike& newHike, double newPrice);
 
-    void HikeList::addHike(const string& locationName, const string& hikeName,
+    void addHike(const std::string& location, const std::string& hikeName,
                             int duration, char difficulty, double newPrice);
 
-    double getPrice(const string& hikeName);
+    // Accessor Function
+    double getPrice(const std::string& hikeName) const;
 
-    void printAllLocations();
+    // Print Functions
+    void printAllLocations() const;
 
-    void printByLocation(const string& location);
+    void printByLocation(const std::string& location) const;
 
-    void printByDuration(int duration);
+    void printByDuration() const;
 
-    void printByDifficulty(char difficulty);
+    void printByDifficulty(char difficulty) const;
 
-    void printByPrice(double price);
+    void printByPrice() const;
 
-    void printByHikeName(const string& hikeName);
+    void printByHikeName(const std::string& hikeName) const;
+
+    void clearList();
     
-	~HikeList( ); 
-		//Destructor
 
 private:
-	multimap<Hike, double> myList;
+	std::multimap<Hike, double> myList;
 };
 
 #endif
