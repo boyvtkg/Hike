@@ -84,3 +84,10 @@ void MemberList::printMember(int searchedID, const string& seachedLastName)
  {
      listOfMember->clear();
  }
+
+ MemberList::~MemberList()
+ {
+     this->clearList();
+     delete listOfMember;
+     listOfMember = nullptr;
+ }

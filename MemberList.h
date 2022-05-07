@@ -38,8 +38,7 @@ public:
     // The function to empty the set
     void clearList();
 
-    // Empty Destructor
-    ~MemberList() {}
+    ~MemberList();
 
 private:
     std::set<Member> * listOfMember;
