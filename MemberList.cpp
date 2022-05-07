@@ -12,7 +12,7 @@
 
 using namespace std;
 
-const int MEMBER_ID_NUMBER = 111;
+const int FIRST_MEMBER_ID_NUMBER = 111;
 
 bool operator<(const Member& firstObj, const Member& secondObj)
 {
@@ -29,7 +29,7 @@ void MemberList::addMember(const std::string& newfirstName, const std::string& n
     Member newObj(newfirstName, newlastName);
     if (listOfMember->empty())
     {
-        newObj.setID(MEMBER_ID_NUMBER);
+        newObj.setID(FIRST_MEMBER_ID_NUMBER);
         listOfMember->insert(newObj);
     }
     else
@@ -45,7 +45,7 @@ void MemberList::addMember(const std::string& newfirstName, const std::string& n
      newObj.addPoints(points);
      if (listOfMember->empty())
      {
-         newObj.setID(MEMBER_ID_NUMBER);
+         newObj.setID(FIRST_MEMBER_ID_NUMBER);
          listOfMember->insert(newObj);
      }
      else
