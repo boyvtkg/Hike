@@ -1,74 +1,54 @@
 /*
-    Fried Rice
-    
-    Bui, Kevin // member 1
-    Pham, Thanh // member 2 
-    Le, Allyson // member 3
-    Le, Amanda // member 4  
+    Demon
+    Pham, Thanh
     
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US    
 */
-
-// Implementation of class Hike.
 #include "Hike.h"
 #include <iostream>
 #include <string>
-#include <map>
 
 using namespace std;
 
-/**
- * @brief Outputs a hike in the format:
- * hikeName (hikeLocation)
- * Difficulty: hikeDifficulty
- * Duration: myHikeDurationDays day(s)
- */
-ostream& operator<<(std::ostream &out, const Hike& myHike)
+ostream& operator<<(std::ostream& out, const Hike& myObj)
 {
-    out << myHike.hikeName << " (" << myHike.hikeLocation << ")" << endl;
-    out << "    Difficulty: " << myHike.hikeDifficulty << endl;
-    out << "    Duration: " << myHike.hikeDurationDays << " day(s)";
-	
-    return out;
+     out << '\t' << myObj.hikeName << " (" << myObj.location << ")\n"
+         << "\t  Difficulty: " << myObj.getDifficulty() << '\n'
+         << "\t  Duration: " << myObj.duration << " day(s)\n";
+     return out;
 }
 
-Hike::Hike(string myLocation, string myHikeName,
-    int myHikeDurationDays, char myHikeDifficulty)
+Hike::Hike( )
 {
-    hikeLocation = myLocation;
-    hikeName = myHikeName;
-    hikeDurationDays = myHikeDurationDays;
-    hikeDifficulty = myHikeDifficulty;
+    duration = 0;
+    difficulty = 'e';
 }
 
-// Accessor Functions
-string Hike::getHikeLocation() const
+Hike::Hike(const std::string newLocation, const std::string newHikeName,
+            int newDuration, char newDifficulty)
 {
-    return hikeLocation;
+    location = newLocation;
+    hikeName = newHikeName;
+    duration = newDuration;
+    difficulty = newDifficulty;
 }
 
-string Hike::getHikeName() const
+string Hike::getDifficulty() const
 {
-    return hikeName;
-}
-
-int Hike::getHikeDuration() const
-{
-    return hikeDurationDays;
-}
-
-string Hike::getHikeDifficulty() const
-{
-    switch (hikeDifficulty)
+    string result;
+    switch (difficulty)
     {
         case 'e':
-            return "easy";
+            result = "easy";
+            break;
         case 'm':
-            return "moderate";
+            result = "moderate";
+            break;
         case 's':
-            return "strenuous";
+            result = "strenuous";
+            break;
     }
+    return result;
 }
-
