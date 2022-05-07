@@ -67,12 +67,12 @@ void MemberList::addMember(const std::string& newfirstName, const std::string& n
      return iter->getPoints();
  }
 
-void MemberList::printMember(int searchedID, const std::string lastName)
+void MemberList::printMember(int searchedID, const std::string seachedLastName)
 {
     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
         [&](const auto& elem) {return elem.getID() == searchedID;});
 
-    if (iter->getLastName() == lastName)
+    if (iter->getLastName() == seachedLastName)
     {
         iter->printMember();
         cout << "\tMembership # " << searchedID << endl;
