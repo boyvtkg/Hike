@@ -1,51 +1,40 @@
 /*
-    Fried Rice
-    Bui, Kevin // member 1
-    Lastname, Firstname // member 2 
-    Lastname, Firstname // member 3
-    Lastname, Firstname // member 4
+    Demon
+    Pham, Thanh
     
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US    
 */
-
 #ifndef HIKE_H
 #define HIKE_H
 
-#include <iostream>
 #include <string>
+#include <iostream>
 
-/**
- * Interface of the class Hike.
- */
 class Hike
 {
-    // Overloaded insertion operator
-    friend std::ostream& operator<<(std::ostream &out, const Hike&);
 
-    public:
-        // Default constructor
-        Hike() : hikeDurationDays(0), hikeDifficulty(0) {}
-        
-        // Overloaded Constructor
-        Hike(const std::string myLocation, const std::string myHikeName,
-                int myHikeDurationDays, char myHikeDifficulty);
+friend std::ostream& operator<<(std::ostream& out, const Hike& myObj);
 
-        // Accessor Functions
-        std::string getHikeLocation() const;
-        std::string getHikeName() const;
-        int getHikeDuration() const;
-        std::string getHikeDifficulty() const;
+public:
+	// Default constructor
+    Hike( );
 
-        // Empty Destructor
-        ~Hike() {}
+    Hike(const std::string newLocation, const std::string newHikeName,
+            int newDuration, char newDifficulty);
 
-    private:
-        std::string hikeLocation;
-        std::string hikeName;
-        int hikeDurationDays;
-        char hikeDifficulty; // 'e' easy, 'm' moderate, 's' strenous
+    // Accessor Function
+    std::string getLocation() const;
+    std::string getHikeName() const;
+    int getDuration();
+    std::string getDifficulty() const;
+
+private:
+	std::string location;
+    std::string hikeName;
+    int duration;
+    char difficulty;
 };
 
 #endif
