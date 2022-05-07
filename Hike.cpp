@@ -10,7 +10,7 @@
 
 using namespace std;
 
-ostream& operator<<(std::ostream& out, const Hike& myObj)
+ostream& operator<<(ostream& out, const Hike& myObj)
 {
     out << '\t' << myObj.hikeName << " (" << myObj.location << ")\n"
         << "\t  Difficulty: " << myObj.getHikeDifficulty() << '\n'
@@ -24,8 +24,8 @@ Hike::Hike()
     difficulty = 'e';
 }
 
-Hike::Hike(const std::string newLocation, const std::string newHikeName,
-    int newDuration, char newDifficulty)
+Hike::Hike(const string& newLocation, const string& newHikeName,
+            int newDuration, char newDifficulty)
 {
     location = newLocation;
     hikeName = newHikeName;

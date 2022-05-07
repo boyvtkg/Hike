@@ -24,7 +24,7 @@ public:
     // Default constructor
     Hike();
 
-    Hike(const std::string newLocation, const std::string newHikeName,
+    Hike(const std::string& newLocation, const std::string& newHikeName,
             int newDuration, char newDifficulty);
 
     // Accessor Function

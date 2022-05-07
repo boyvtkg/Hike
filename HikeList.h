@@ -29,7 +29,7 @@ public:
     void addHike(const Hike& newHike, double newPrice);
 
     void addHike(const std::string& location, const std::string& hikeName,
-                            int duration, char difficulty, double newPrice);
+                    int duration, char difficulty, double newPrice);
 
     // Accessor Function
     double getPrice(const std::string& hikeName) const;
