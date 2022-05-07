@@ -52,5 +52,5 @@ int Member::getPoints() const
 void Member::printMember() const
 {
     cout << '\t' << lastName << ", " << firstName << "\n"
-        << "\tPoints available: " << points << "\n";
+         << "\tPoints available: " << points << "\n";
 }
