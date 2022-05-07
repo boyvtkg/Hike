@@ -25,8 +25,8 @@ public:
     MemberList();
 
     // Adding member functions
-    void addMember(const std::string& newfirstName, const std::string& newlastName);
-    void addMember(const std::string& newfirstName, const std::string& newlastName, int points);
+    void addMember(const std::string& firstName, const std::string& lastName);
+    void addMember(const std::string& firstName, const std::string& lastName, int points);
 
     // Accessor Functions
     int getLastID() const;

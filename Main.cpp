@@ -26,7 +26,7 @@ int main()
     newList.addMember("Dani", "Ekbote", 4);
     //cout << newList.getLastID();
     newList.printMember(111, "Pham");
-    newList.~MemberList();
+    //newList.~MemberList();
     newList.printMember(112, "Ekbote");
     //cout << newList.getPoints(112);
 

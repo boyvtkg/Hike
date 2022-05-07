@@ -24,9 +24,9 @@ MemberList::MemberList()
     listOfMember = new set<Member>;
 }
 
-void MemberList::addMember(const string& newfirstName, const string& newlastName)
+void MemberList::addMember(const string& firstName, const string& lastName)
 {
-    Member newObj(newfirstName, newlastName);
+    Member newObj(firstName, lastName);
     if (listOfMember->empty())
     {
         newObj.setID(FIRST_MEMBER_ID_NUMBER);
@@ -39,9 +39,9 @@ void MemberList::addMember(const string& newfirstName, const string& newlastName
     }
 }
 
- void MemberList::addMember(const string& newfirstName, const string& newlastName, int points)
+ void MemberList::addMember(const string& firstName, const string& lastName, int points)
  {
-     Member newObj(newfirstName, newlastName);
+     Member newObj(firstName, lastName);
      newObj.addPoints(points);
 
      if (listOfMember->empty())
