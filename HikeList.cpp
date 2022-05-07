@@ -25,7 +25,7 @@ void HikeList::addHike(const Hike& newHike, double newPrice)
 }
 
 void HikeList::addHike(const string& location, const string& hikeName,
-    int duration, char difficulty, double newPrice)
+                        int duration, char difficulty, double newPrice)
 {
     Hike newHike(location, hikeName, duration, difficulty);
     theHikeList.insert(make_pair(newHike, newPrice));
@@ -34,7 +34,7 @@ void HikeList::addHike(const string& location, const string& hikeName,
 double HikeList::getPrice(const string& hikeName) const
 {
     auto iter = find_if(theHikeList.begin(), theHikeList.end(), [&](const auto& elem)
-        {return elem.first.getHikeName() == hikeName; });
+                        {return elem.first.getHikeName() == hikeName; });
     return iter->second;
 }
 
@@ -54,20 +54,20 @@ void HikeList::printByLocation(const string& location) const
     auto iter = theHikeList.begin();
     auto iterEnd = theHikeList.end();
     iter = find_if(iter, iterEnd, [&](const auto& elem)
-        {return elem.first.getHikeLocation() == location; });
+                    {return elem.first.getHikeLocation() == location; });
     cout << fixed << showpoint << setprecision(2);
 
     while (iter != iterEnd)
     {
 
         cout << '\t' << iter->first.getHikeName() << " (" << location << ")" << endl
-            << "\t  Difficulty: " << (iter->first).getHikeDifficulty() << endl
-            << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)" << endl
-            << "\t  Price (per person): $ " << iter->second << endl;
+             << "\t  Difficulty: " << (iter->first).getHikeDifficulty() << endl
+             << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)" << endl
+             << "\t  Price (per person): $ " << iter->second << endl;
 
         ++iter;
         iter = find_if(iter, iterEnd, [&](const auto& elem)
-            {return elem.first.getHikeLocation() == location; });
+                        {return elem.first.getHikeLocation() == location; });
         cout << endl;
     }
 }
@@ -78,12 +78,11 @@ void HikeList::printByDuration() const
 
     for (const auto& elem : theHikeList)
     {
-        tempList.insert(make_pair(elem.first.getHikeDuration(),
-            elem.first.getHikeLocation()));
+        tempList.insert(make_pair(elem.first.getHikeDuration(), elem.first.getHikeLocation()));
     }
 
     for_each(tempList.begin(), tempList.end(), [](const auto& elem)
-        {cout << "\t(" << elem.first << ") " << elem.second << endl; });
+            {cout << "\t(" << elem.first << ") " << elem.second << endl; });
 }
 
 void HikeList::printByDifficulty(char difficulty) const
@@ -99,6 +98,7 @@ void HikeList::printByDifficulty(char difficulty) const
 void HikeList::printByPrice() const
 {
     multimap<double, pair<string, string>> tempList;
+
     for (const auto& elem : theHikeList)
     {
         pair<string, string> newPair(elem.first.getHikeLocation(), elem.first.getHikeName());
@@ -118,7 +118,7 @@ void HikeList::printByHikeName(const string& hikeName) const
     cout << fixed << showpoint << setprecision(2);
 
     auto iter = find_if(theHikeList.begin(), theHikeList.end(), [&](const auto& elem)
-        {return elem.first.getHikeName() == hikeName; });
+                        {return elem.first.getHikeName() == hikeName; });
 
     cout << '\t' << hikeName << " (" << iter->first.getHikeLocation() << ")\n"
          << "\t  Difficulty: " << (iter->first).getHikeDifficulty() << endl

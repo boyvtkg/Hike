@@ -16,7 +16,7 @@ const int FIRST_MEMBER_ID_NUMBER = 111;
 
 bool operator<(const Member& firstObj, const Member& secondObj)
 {
-    return firstObj.getID() < secondObj.getID();
+    return (firstObj.getID() < secondObj.getID());
 }
 
 MemberList::MemberList()
@@ -43,6 +43,7 @@ void MemberList::addMember(const string& newfirstName, const string& newlastName
  {
      Member newObj(newfirstName, newlastName);
      newObj.addPoints(points);
+
      if (listOfMember->empty())
      {
          newObj.setID(FIRST_MEMBER_ID_NUMBER);
@@ -62,15 +63,15 @@ void MemberList::addMember(const string& newfirstName, const string& newlastName
 
  int MemberList::getPoints(int searchedID) const
  {
-     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
-         [&](const auto& elem) {return elem.getID() == searchedID;});
+     auto iter = find_if(listOfMember->begin(), listOfMember->end(), [&](const auto& elem)
+                        {return elem.getID() == searchedID;});
      return iter->getPoints();
  }
 
 void MemberList::printMember(int searchedID, const string& seachedLastName)
 {
-    auto iter = find_if(listOfMember->begin(), listOfMember->end(),
-        [&](const auto& elem) {return elem.getID() == searchedID;});
+    auto iter = find_if(listOfMember->begin(), listOfMember->end(), [&](const auto& elem)
+                        {return elem.getID() == searchedID;});
 
     if (iter->getLastName() == seachedLastName)
     {
