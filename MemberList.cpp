@@ -24,7 +24,7 @@ MemberList::MemberList()
     listOfMember = new set<Member>;
 }
 
-void MemberList::addMember(const std::string& newfirstName, const std::string& newlastName)
+void MemberList::addMember(const string& newfirstName, const string& newlastName)
 {
     Member newObj(newfirstName, newlastName);
     if (listOfMember->empty())
@@ -67,7 +67,7 @@ void MemberList::addMember(const std::string& newfirstName, const std::string& n
      return iter->getPoints();
  }
 
-void MemberList::printMember(int searchedID, const std::string seachedLastName)
+void MemberList::printMember(int searchedID, const string seachedLastName)
 {
     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
         [&](const auto& elem) {return elem.getID() == searchedID;});
