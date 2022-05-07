@@ -33,7 +33,7 @@ public:
     int getPoints(int searchedID) const;
 
     // Print function
-    void printMember(int searchedID, const std::string seachedLastName);
+    void printMember(int searchedID, const std::string& seachedLastName);
 
     // The function to empty the set
     void clearList();

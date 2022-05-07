@@ -67,7 +67,7 @@ void MemberList::addMember(const string& newfirstName, const string& newlastName
      return iter->getPoints();
  }
 
-void MemberList::printMember(int searchedID, const string seachedLastName)
+void MemberList::printMember(int searchedID, const string& seachedLastName)
 {
     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
         [&](const auto& elem) {return elem.getID() == searchedID;});
