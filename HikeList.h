@@ -1,26 +1,24 @@
 /*
-    Fried Rice
-    Bui, Kevin // member 1
-    Pham, Thanh // member 2 
-    Le, Allyson // member 3
-    Le, Amanda // member 4  
-    
+    Demon
+    Pham, Thanh
+
     Spring 2022
     CS A250 - C++ 2
-    Project: Hiking in the US    
+    Project: Hiking in the US
 */
 #ifndef HIKELIST_H
 #define HIKELIST_H
 
 #include "Hike.h"
 #include <string>
-#include <iostream>
-#include <iomanip>
 #include <map>
 
-class HikeList : public Hike
+/**
+ * Interface of the class HikeList.
+ */
+class HikeList
 {
-    // Overloaded less operator
+    // Overloaded less operator for comparing 2 Locations from 2 Hike objects
     friend bool operator<(const Hike& firstObj, const Hike& secondObj);
 
 public:
@@ -49,11 +47,11 @@ public:
 
     void printByHikeName(const std::string& hikeName) const;
 
+    // The function to empty 
     void clearList();
     
-
 private:
-	std::multimap<Hike, double> myList;
+	std::multimap<Hike, double> theHikeList;
 };
 
 #endif

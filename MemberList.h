@@ -1,33 +1,48 @@
+/*
+    Demon
+    Pham, Thanh
+
+    Spring 2022
+    CS A250 - C++ 2
+    Project: Hiking in the US
+*/
 #ifndef MEMBERLIST_H
 #define MEMBERLIST_H
 
 #include "Member.h"
-#include <iostream>
 #include <string>
 #include <set> 
 
-int MEMBER_ID = 111;
-
-class MemberList : public Member
+/**
+ * Interface of the class MemberList.
+ */
+class MemberList
 {
+    // Overloaded less operator using for comparing 2 IDs of 2 objects
     friend bool operator<(const Member& firstObj, const Member& secondObj);
 public:
-    MemberList(); //: new std::set<Member> {}
+    // Default constructor
+    MemberList();
 
-    void addMember(const std::string& firstName, const std::string& lastName);
-    void addMember(const std::string& firstName, const std::string& lastName, int points);
-    
-    // int getLastID() const;
-    // int getPoints(int id) const;
-    
-    void printMember(int id, const std::string lastName);
+    // Adding member functions
+    void addMember(const std::string& newfirstName, const std::string& newlastName);
+    void addMember(const std::string& newfirstName, const std::string& newlastName, int points);
 
-    // void clearList();
+    // Accessor Functions
+    int getLastID() const;
+    int getPoints(int searchedID) const;
 
-    // ~MemberList() {}
+    // Print function
+    void printMember(int searchedID, const std::string lastName);
+
+    // The function to empty the set
+    void clearList();
+
+    // Empty Destructor
+    ~MemberList() {}
 
 private:
-    std::set<Member>* memberSet; 
+    std::set<Member> * listOfMember;
 };
 
 #endif

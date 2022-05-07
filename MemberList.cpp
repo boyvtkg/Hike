@@ -1,76 +1,85 @@
-#include "MemberList.h" 
+/*
+    Demon
+    Pham, Thanh
 
+    Spring 2022
+    CS A250 - C++ 2
+    Project: Hiking in the US
+*/
+#include "MemberList.h" 
 #include <iostream>
-#include <string>
-#include <set>
+#include <algorithm>
 
 using namespace std;
 
+const int MEMBER_ID_NUMBER = 111;
+
 bool operator<(const Member& firstObj, const Member& secondObj)
 {
-    return firstObj.getId() < secondObj.getId();
+    return firstObj.getID() < secondObj.getID();
 }
 
 MemberList::MemberList()
 {
-    memberSet = new set<Member>;
+    listOfMember = new set<Member>;
 }
 
-void MemberList::addMember(const std::string& firstName, const std::string& lastName)
+void MemberList::addMember(const std::string& newfirstName, const std::string& newlastName)
 {
-    Member myObj(firstName, lastName);
-    if (memberSet->empty())
+    Member newObj(newfirstName, newlastName);
+    if (listOfMember->empty())
     {
-        myObj.setID(MEMBER_ID);
-        memberSet->insert(myObj);
+        newObj.setID(MEMBER_ID_NUMBER);
+        listOfMember->insert(newObj);
     }
     else
     {
-        myObj.setID(((memberSet->begin())->getId()) + 1);
-        memberSet->insert(myObj);
+        newObj.setID(((listOfMember->begin())->getID()) + 1);
+        listOfMember->insert(newObj);
     }
 }
 
-// void MemberList::addMember(const std::string& firstName, const std::string& lastName, int points)
-// {
-//     Member myObj(firstName, lastName, points);
-//     if (memberSet->empty())
-//     {
-//         myObj.setID(MEMBER_ID);
-//         memberSet->insert(myObj);
-//     }
-//     else
-//     {
-//         myObj.setID(((memberSet->begin())->getId()) + 1);
-//         memberSet->insert(myObj);
-//     }
-// }
+ void MemberList::addMember(const string& newfirstName, const string& newlastName, int points)
+ {
+     Member newObj(newfirstName, newlastName);
+     newObj.addPoints(points);
+     if (listOfMember->empty())
+     {
+         newObj.setID(MEMBER_ID_NUMBER);
+         listOfMember->insert(newObj);
+     }
+     else
+     {
+         newObj.setID(((listOfMember->begin())->getID()) + 1);
+         listOfMember->insert(newObj);
+     }
+ }
 
-// int MemberList::getLastID() const
-// {
-//     auto iter = memberSet.end();
-//     return *iter;
-// }
+ int MemberList::getLastID() const
+ {
+     return listOfMember->rbegin()->getID();
+ }
 
-// int MemberList::getPoints(int id) const
-// {
-//     auto iter = find_if(hikeMap.begin(), hikeMap.end(), 
-//                 [&](const auto& hikePair) {return (hikeName == (hikrPair.first.getHike()));})
-//     return *iter;
-// }
+ int MemberList::getPoints(int searchedID) const
+ {
+     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
+         [&](const auto& elem) {return elem.getID() == searchedID;});
+     return iter->getPoints();
+ }
 
-void MemberList::printMember(int id, const std::string lastName)
+void MemberList::printMember(int searchedID, const std::string lastName)
 {
-    auto iter = find_if(memberSet.begin(), memberSet.end(), 
-                [&](const auto& hikePair) {return (id == (hikePair.first.getID()));})
-    if (lastName == iter->getLastName())
+    auto iter = find_if(listOfMember->begin(), listOfMember->end(),
+        [&](const auto& elem) {return elem.getID() == searchedID;});
+
+    if (iter->getLastName() == lastName)
     {
         iter->printMember();
-        cout << "Membership # " << id << endl;
+        cout << "\tMembership # " << searchedID << endl;
     }
 }
 
-// void MemberList::clearList()
-// {
-//     memberSet.clear();
-// }
+ void MemberList::clearList()
+ {
+     listOfMember->clear();
+ }
