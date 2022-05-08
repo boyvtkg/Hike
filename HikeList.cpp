@@ -12,6 +12,19 @@
 
 using namespace std;
 
+// helper function to return difficulty
+string difficulty(char c)
+{
+    if (c == 'e')
+        return "easy";
+    else if (c == 'm')
+        return "moderate";
+    else if (c == 's')
+        return "strenuous";
+    else
+        return "";
+}
+
 bool operator<(const Hike& firstObj, const Hike& secondObj)
 {
     return (firstObj.getHikeLocation() < secondObj.getHikeLocation());
@@ -50,7 +63,6 @@ void HikeList::printAllLocations() const
 
 void HikeList::printByLocation(const string& location) const
 {
-
     auto iter = theHikeList.begin();
     auto iterEnd = theHikeList.end();
     iter = find_if(iter, iterEnd, [&](const auto& elem)
@@ -61,7 +73,7 @@ void HikeList::printByLocation(const string& location) const
     {
 
         cout << '\t' << iter->first.getHikeName() << " (" << location << ")" << endl
-             << "\t  Difficulty: " << (iter->first).getHikeDifficulty() << endl
+             << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << endl
              << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)" << endl
              << "\t  Price (per person): $ " << iter->second << endl;
 
@@ -89,7 +101,7 @@ void HikeList::printByDifficulty(char difficulty) const
 {
     for (const auto& elem : theHikeList)
     {
-        if (elem.first.getHikeDifficulty().front() == difficulty)
+        if (elem.first.getHikeDifficulty() == difficulty)
             cout << "\t(" << difficulty << ") " << elem.first.getHikeName() << ", "
                  << elem.first.getHikeLocation() << endl;
     }
@@ -121,7 +133,7 @@ void HikeList::printByHikeName(const string& hikeName) const
                         {return elem.first.getHikeName() == hikeName; });
 
     cout << '\t' << hikeName << " (" << iter->first.getHikeLocation() << ")\n"
-         << "\t  Difficulty: " << (iter->first).getHikeDifficulty() << endl
+         << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << endl
          << "\t  Duration: " << iter->first.getHikeDuration() << " day(s)\n"
          << "\t  $" << iter->second << endl;
 

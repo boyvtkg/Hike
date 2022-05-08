@@ -12,8 +12,15 @@ using namespace std;
 
 ostream& operator<<(ostream& out, const Hike& myObj)
 {
+    string difficulty;
+    if (myObj.getHikeDifficulty() == 'e')
+        difficulty = "easy";
+    else if (myObj.getHikeDifficulty() == 'm')
+        difficulty = "moderate";
+    else if (myObj.getHikeDifficulty() == 's')
+        difficulty = "strenuous";
     out << '\t' << myObj.hikeName << " (" << myObj.location << ")\n"
-        << "\t  Difficulty: " << myObj.getHikeDifficulty() << '\n'
+        << "\t  Difficulty: " << difficulty << '\n'
         << "\t  Duration: " << myObj.duration << " day(s)\n";
     return out;
 }
@@ -48,14 +55,7 @@ int Hike::getHikeDuration() const
     return duration;
 }
 
-string Hike::getHikeDifficulty() const
+char Hike::getHikeDifficulty() const
 {
-    if (difficulty == 'e')
-        return "easy";
-    else if (difficulty == 'm')
-        return "moderate";
-    else if (difficulty == 's')
-        return "strenuous";
-    else
-        return "";
+    return difficulty;
 }

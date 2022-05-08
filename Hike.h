@@ -31,7 +31,7 @@ public:
     std::string getHikeLocation() const;
     std::string getHikeName() const;
     int getHikeDuration() const;
-    std::string getHikeDifficulty() const;
+    char getHikeDifficulty() const;
 
 private:
     std::string location;
