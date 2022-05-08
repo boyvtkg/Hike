@@ -72,10 +72,10 @@ void HikeList::printByLocation(const string& location) const
     while (iter != iterEnd)
     {
 
-        cout << '\t' << iter->first.getHikeName() << " (" << location << ")" << endl
-             << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << endl
-             << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)" << endl
-             << "\t  Price (per person): $ " << iter->second << endl;
+        cout << '\t' << iter->first.getHikeName() << " (" << location << ")\n"
+             << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << '\n'
+             << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)\n"
+             << "\t  Price (per person): $ " << iter->second << '\n';
 
         ++iter;
         iter = find_if(iter, iterEnd, [&](const auto& elem)
@@ -121,7 +121,7 @@ void HikeList::printByPrice() const
     for (const auto& elem : tempList)
     {
         cout << "\t$ " << setw(7) << elem.first << " - "
-             << elem.second.first << " (" << elem.second.second << ")\n";
+            << elem.second.first << " (" << elem.second.second << ")\n";
     }
 }
 
@@ -133,9 +133,9 @@ void HikeList::printByHikeName(const string& hikeName) const
                         {return elem.first.getHikeName() == hikeName; });
 
     cout << '\t' << hikeName << " (" << iter->first.getHikeLocation() << ")\n"
-         << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << endl
+         << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << '\n'
          << "\t  Duration: " << iter->first.getHikeDuration() << " day(s)\n"
-         << "\t  $" << iter->second << endl;
+         << "\t  $" << iter->second << '\n';
 
 }
 

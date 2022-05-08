@@ -29,10 +29,10 @@ int main()
     newList.addHike("Arizona", "Sedona", 4, 'e', 5099);
     newList.addHike("Georgia", "Savannah", 3, 'e', 499);
     newList.addHike("Montana", "Glacier", 6, 's', 3999);
-    //newList.printAllLocations();
-    //newList.printByLocation("California");
-    //newList.printByDuration();
-    //newList.printByDifficulty('e');
-    //newList.printByPrice();
+    newList.printAllLocations();
+    newList.printByLocation("California");
+    newList.printByDuration();
+    newList.printByDifficulty('e');
+    newList.printByPrice();
     newList.printByHikeName("Yosemite");
 }
