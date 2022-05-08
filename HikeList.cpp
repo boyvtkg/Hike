@@ -121,7 +121,7 @@ void HikeList::printByPrice() const
     for (const auto& elem : tempList)
     {
         cout << "\t$ " << setw(7) << elem.first << " - "
-            << elem.second.first << " (" << elem.second.second << ")\n";
+             << elem.second.first << " (" << elem.second.second << ")\n";
     }
 }
 
