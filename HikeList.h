@@ -41,6 +41,8 @@ public:
 
     void printByDuration() const;
 
+    void printByDuration(int days) const;
+
     void printByDifficulty(char difficulty) const;
 
     void printByPrice() const;

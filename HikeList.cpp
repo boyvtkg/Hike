@@ -12,19 +12,6 @@
 
 using namespace std;
 
-// helper function to return difficulty
-string difficulty(char c)
-{
-    if (c == 'e')
-        return "easy";
-    else if (c == 'm')
-        return "moderate";
-    else if (c == 's')
-        return "strenuous";
-    else
-        return "";
-}
-
 bool operator<(const Hike& firstObj, const Hike& secondObj)
 {
     return (firstObj.getHikeLocation() < secondObj.getHikeLocation());
@@ -46,7 +33,7 @@ void HikeList::addHike(const string& location, const string& hikeName,
 
 double HikeList::getPrice(const string& hikeName) const
 {
-    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [&](const auto& elem)
+    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [& hikeName](const auto& elem)
                         {return elem.first.getHikeName() == hikeName; });
     return iter->second;
 }
@@ -65,20 +52,17 @@ void HikeList::printByLocation(const string& location) const
 {
     auto iter = theHikeList.begin();
     auto iterEnd = theHikeList.end();
-    iter = find_if(iter, iterEnd, [&](const auto& elem)
+    iter = find_if(iter, iterEnd, [& location](const auto& elem)
                     {return elem.first.getHikeLocation() == location; });
     cout << fixed << showpoint << setprecision(2);
 
     while (iter != iterEnd)
     {
 
-        cout << '\t' << iter->first.getHikeName() << " (" << location << ")\n"
-             << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << '\n'
-             << "\t  Duration: " << (iter->first).getHikeDuration() << " day(s)\n"
+        cout << iter->first
              << "\t  Price (per person): $ " << iter->second << '\n';
 
-        ++iter;
-        iter = find_if(iter, iterEnd, [&](const auto& elem)
+        iter = find_if(++iter, iterEnd, [& location](const auto& elem)
                         {return elem.first.getHikeLocation() == location; });
         cout << endl;
     }
@@ -95,6 +79,17 @@ void HikeList::printByDuration() const
 
     for_each(tempList.begin(), tempList.end(), [](const auto& elem)
             {cout << "\t(" << elem.first << ") " << elem.second << endl; });
+}
+
+void HikeList::printByDuration(int days) const
+{
+    for (const auto& elem : theHikeList)
+    {
+        if (elem.first.getHikeDuration() == days)
+        {
+            cout << elem.first << endl;
+        }
+    }
 }
 
 void HikeList::printByDifficulty(char difficulty) const
@@ -129,12 +124,10 @@ void HikeList::printByHikeName(const string& hikeName) const
 {
     cout << fixed << showpoint << setprecision(2);
 
-    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [&](const auto& elem)
+    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [& hikeName](const auto& elem)
                         {return elem.first.getHikeName() == hikeName; });
 
-    cout << '\t' << hikeName << " (" << iter->first.getHikeLocation() << ")\n"
-         << "\t  Difficulty: " << difficulty((iter->first).getHikeDifficulty()) << '\n'
-         << "\t  Duration: " << iter->first.getHikeDuration() << " day(s)\n"
+    cout << iter->first
          << "\t  $" << iter->second << '\n';
 
 }

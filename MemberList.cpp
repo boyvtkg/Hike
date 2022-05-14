@@ -26,34 +26,32 @@ MemberList::MemberList()
 
 void MemberList::addMember(const string& firstName, const string& lastName)
 {
-    Member newObj(firstName, lastName);
+    Member newMember(firstName, lastName);
     if (listOfMember->empty())
     {
-        newObj.setID(FIRST_MEMBER_ID_NUMBER);
-        listOfMember->insert(newObj);
+        newMember.setID(FIRST_MEMBER_ID_NUMBER);
     }
     else
     {
-        newObj.setID(((listOfMember->begin())->getID()) + 1);
-        listOfMember->insert(newObj);
+        newMember.setID((listOfMember->rbegin())->getID() + 1);
     }
+    listOfMember->insert(newMember);
 }
 
  void MemberList::addMember(const string& firstName, const string& lastName, int points)
  {
-     Member newObj(firstName, lastName);
-     newObj.addPoints(points);
+     Member newMember(firstName, lastName);
+     newMember.addPoints(points);
 
      if (listOfMember->empty())
      {
-         newObj.setID(FIRST_MEMBER_ID_NUMBER);
-         listOfMember->insert(newObj);
+         newMember.setID(FIRST_MEMBER_ID_NUMBER);
      }
      else
      {
-         newObj.setID(((listOfMember->begin())->getID()) + 1);
-         listOfMember->insert(newObj);
+         newMember.setID((listOfMember->rbegin())->getID() + 1);
      }
+     listOfMember->insert(newMember);
  }
 
  int MemberList::getLastID() const
@@ -63,20 +61,21 @@ void MemberList::addMember(const string& firstName, const string& lastName)
 
  int MemberList::getPoints(int searchedID) const
  {
-     auto iter = find_if(listOfMember->begin(), listOfMember->end(), [&](const auto& elem)
+     auto iter = find_if(listOfMember->begin(), listOfMember->end(), [& searchedID](const auto& elem)
                         {return elem.getID() == searchedID;});
      return iter->getPoints();
  }
 
 void MemberList::printMember(int searchedID, const string& seachedLastName)
 {
-    auto iter = find_if(listOfMember->begin(), listOfMember->end(), [&](const auto& elem)
+    auto iter = find_if(listOfMember->begin(), listOfMember->end(), [& searchedID](const auto& elem)
                         {return elem.getID() == searchedID;});
 
     if (iter->getLastName() == seachedLastName)
     {
         iter->printMember();
         cout << "\tMembership # " << searchedID << endl;
+        cout << endl;
     }
 }
 
@@ -87,7 +86,7 @@ void MemberList::printMember(int searchedID, const string& seachedLastName)
 
  MemberList::~MemberList()
  {
-     this->clearList();
+     clearList();
      delete listOfMember;
      listOfMember = nullptr;
  }
