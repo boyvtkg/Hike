@@ -1,3 +1,11 @@
+/*
+	Demon
+	Pham, Thanh
+
+	Spring 2022
+	CS A250 - C++ 2
+	Project: Hiking in the US
+*/
 #include <string>
 #include <iostream>
 #include <iomanip>
