@@ -12,30 +12,31 @@ using namespace std;
 
 int Reservations::addReservation(int theMemberID, const string& theHikeName)
 {
-    if (count == 0)
+	int reservationNumber = FIRST_RESERVATION_NUMBER + count;
+	if (count == 0)
     {
-        first = last = new Node(FIRST_RESERVATION_NUMBER,
+        first = last = new Node(reservationNumber,
                                 theMemberID, theHikeName, nullptr, nullptr);
     }
     else
     {
-        last->setNext(new Node(FIRST_RESERVATION_NUMBER + count,
-                        theMemberID, theHikeName, last, nullptr));
+        last->setNext(new Node(reservationNumber,
+								theMemberID, theHikeName, last, nullptr));
         last = last->getNext();
     }
     ++count;
-	return FIRST_RESERVATION_NUMBER + count - 1;
+	return reservationNumber;
 }
 
 Node* Reservations::findReservation(int rsvnNumber) const
 {
 	Node* current = first;
-	bool done = false;
-	while (!done)
+	bool found = false;
+	while (!found)
 	{
 		if (current->getReservationNumber() == rsvnNumber)
 		{
-			done = true;
+			found = true;
 		}
 		else
 		{
@@ -52,7 +53,7 @@ void Reservations::cancelReservation(int theReservationNumber)
 		delete first;
 		first = last = nullptr;
 	}
-	else // more than 1 nodes;
+	else // more than 1 nodes
 	{
 		Node* pNode = findReservation(theReservationNumber);
 		if (pNode == first)

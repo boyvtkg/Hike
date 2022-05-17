@@ -41,7 +41,8 @@ double HikeList::getPrice(const string& hikeName) const
 void HikeList::printAllLocations() const
 {
     auto iter = theHikeList.begin();
-    while (iter != theHikeList.end())
+    auto iterEnd = theHikeList.end();
+    while (iter != iterEnd)
     {
         cout << '\t' << (iter->first).getHikeLocation() << endl;
         iter = theHikeList.upper_bound(iter->first);
@@ -58,7 +59,6 @@ void HikeList::printByLocation(const string& location) const
 
     while (iter != iterEnd)
     {
-
         cout << iter->first
              << "\t  Price (per person): $ " << iter->second << '\n';
 

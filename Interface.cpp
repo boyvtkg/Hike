@@ -31,28 +31,28 @@ void displayMenu()
 
 void processReservation(HikeList& hikeList, MemberList& memberList, Reservations& reservationList)
 {
-	while (cin)
+	int n = 0;
+	while (n != 8)
 	{
 		cout << "Please make a selection: ";
-		int n;
 		cin >> n;
 		cout << endl;
-		if (n == 1) chooseByLocation(hikeList, memberList, reservationList);
-		else if (n == 2) chooseByDuration(hikeList, memberList, reservationList);
-		else if (n == 3) chooseByDifficulty(hikeList, memberList, reservationList);
-		else if (n == 4) chooseByPrice(hikeList, memberList, reservationList);
-		else if (n == 5) makeReservation(hikeList, memberList, reservationList);
-		else if (n == 6) viewReservation(hikeList, memberList, reservationList);
-		else if (n == 7) cancelReservation(hikeList, memberList, reservationList);
-		else if (n == 8)
+		if (n != 8)
 		{
-			cout << "Thank you for visiting!" << endl
-				<< endl;
+			if (n == 1) chooseByLocation(hikeList, memberList, reservationList);
+			else if (n == 2) chooseByDuration(hikeList, memberList, reservationList);
+			else if (n == 3) chooseByDifficulty(hikeList, memberList, reservationList);
+			else if (n == 4) chooseByPrice(hikeList, memberList, reservationList);
+			else if (n == 5) makeReservation(hikeList, memberList, reservationList);
+			else if (n == 6) viewReservation(hikeList, memberList, reservationList);
+			else if (n == 7) cancelReservation(hikeList, memberList, reservationList);
+			system("Pause");
+			cout << endl;
+			displayMenu();
 		}
-		system("Pause");
-		cout << endl;
-		displayMenu();
 	}
+	cout << "Thank you for visiting!" << endl
+		<< endl;
 }
 
 void chooseByLocation(HikeList& hikeList, MemberList& memberList, Reservations& reservationList)
