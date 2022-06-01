@@ -1,23 +1,20 @@
-/*
+/*/*
     Demon
+
     Pham, Thanh
 
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US
 */
+
 #include "HikeList.h"
+
+#include <iostream>
 #include <iomanip>
 #include <algorithm>
 
 using namespace std;
-
-bool operator<(const Hike& firstObj, const Hike& secondObj)
-{
-    return (firstObj.getHikeLocation() < secondObj.getHikeLocation());
-}
-
-HikeList::HikeList() {}
 
 void HikeList::addHike(const Hike& newHike, double newPrice)
 {
@@ -25,7 +22,7 @@ void HikeList::addHike(const Hike& newHike, double newPrice)
 }
 
 void HikeList::addHike(const string& location, const string& hikeName,
-                        int duration, char difficulty, double newPrice)
+    int duration, char difficulty, double newPrice)
 {
     Hike newHike(location, hikeName, duration, difficulty);
     theHikeList.insert(make_pair(newHike, newPrice));
@@ -33,8 +30,9 @@ void HikeList::addHike(const string& location, const string& hikeName,
 
 double HikeList::getPrice(const string& hikeName) const
 {
-    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [& hikeName](const auto& elem)
-                        {return elem.first.getHikeName() == hikeName; });
+    auto iter = find_if(theHikeList.begin(), theHikeList.end(),
+        [& hikeName] (const auto& elem) 
+        {return elem.first.getHikeName() == hikeName; });
     return iter->second;
 }
 
@@ -44,7 +42,7 @@ void HikeList::printAllLocations() const
     auto iterEnd = theHikeList.end();
     while (iter != iterEnd)
     {
-        cout << '\t' << (iter->first).getHikeLocation() << endl;
+        cout << '\t' << iter->first.getHikeLocation() << endl;
         iter = theHikeList.upper_bound(iter->first);
     }
 }
@@ -53,8 +51,9 @@ void HikeList::printByLocation(const string& location) const
 {
     auto iter = theHikeList.begin();
     auto iterEnd = theHikeList.end();
-    iter = find_if(iter, iterEnd, [& location](const auto& elem)
-                    {return elem.first.getHikeLocation() == location; });
+    iter = find_if(iter, iterEnd, 
+        [& location](const auto& elem) 
+        {return elem.first.getHikeLocation() == location; });
     cout << fixed << showpoint << setprecision(2);
 
     while (iter != iterEnd)
@@ -63,22 +62,24 @@ void HikeList::printByLocation(const string& location) const
              << "\t  Price (per person): $ " << iter->second << '\n';
 
         iter = find_if(++iter, iterEnd, [& location](const auto& elem)
-                        {return elem.first.getHikeLocation() == location; });
+            {return elem.first.getHikeLocation() == location; });
         cout << endl;
     }
 }
 
 void HikeList::printByDuration() const
 {
-    multimap<int, string> tempList;
+    multimap<int, pair<string, string>> tempList;
 
     for (const auto& elem : theHikeList)
     {
-        tempList.insert(make_pair(elem.first.getHikeDuration(), elem.first.getHikeLocation()));
+        pair<string, string> newPair(elem.first.getHikeName(), elem.first.getHikeLocation());
+        tempList.insert(make_pair(elem.first.getHikeDuration(), newPair));
     }
 
-    for_each(tempList.begin(), tempList.end(), [](const auto& elem)
-            {cout << "\t(" << elem.first << ") " << elem.second << endl; });
+    for_each(tempList.begin(), tempList.end(),
+        [](const auto& elem) {cout << "\t(" << elem.first << ") " 
+        << elem.second.first << ", " << elem.second.second << endl; });
 }
 
 void HikeList::printByDuration(int days) const
@@ -97,8 +98,10 @@ void HikeList::printByDifficulty(char difficulty) const
     for (const auto& elem : theHikeList)
     {
         if (elem.first.getHikeDifficulty() == difficulty)
-            cout << "\t(" << difficulty << ") " << elem.first.getHikeName() << ", "
+        {
+            cout << "\t(" << difficulty << ") " << elem.first.getHikeName() << ", " 
                  << elem.first.getHikeLocation() << endl;
+        }
     }
 }
 
@@ -124,8 +127,8 @@ void HikeList::printByHikeName(const string& hikeName) const
 {
     cout << fixed << showpoint << setprecision(2);
 
-    auto iter = find_if(theHikeList.begin(), theHikeList.end(), [& hikeName](const auto& elem)
-                        {return elem.first.getHikeName() == hikeName; });
+    auto iter = find_if(theHikeList.begin(), theHikeList.end(), 
+        [& hikeName](const auto& elem) {return elem.first.getHikeName() == hikeName; });
 
     cout << iter->first
          << "\t  $" << iter->second << '\n';

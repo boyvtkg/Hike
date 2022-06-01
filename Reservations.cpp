@@ -1,49 +1,37 @@
 /*
 	Demon
+
 	Pham, Thanh
 
 	Spring 2022
 	CS A250 - C++ 2
 	Project: Hiking in the US
 */
+
 #include "Reservations.h"
+
+#include <iostream>
 
 using namespace std;
 
-int Reservations::addReservation(int theMemberID, const string& theHikeName)
+int Reservations::addReservation(int theMemberID, 
+	const string& theHikeName)
 {
-	int reservationNumber = FIRST_RESERVATION_NUMBER + count;
+	int reservationNumber = FIRST_RESERVATION_NUMBER;
 	if (count == 0)
     {
-        first = last = new Node(reservationNumber,
-                                theMemberID, theHikeName, nullptr, nullptr);
+		first = last = new Node(reservationNumber, 
+			theMemberID, theHikeName, nullptr, nullptr);
     }
     else
     {
-        last->setNext(new Node(reservationNumber,
-								theMemberID, theHikeName, last, nullptr));
+		reservationNumber = last->getReservationNumber() + 1;
+		last->setNext(new Node(reservationNumber,
+						theMemberID, theHikeName, last, nullptr));
         last = last->getNext();
     }
     ++count;
 	return reservationNumber;
-}
-
-Node* Reservations::findReservation(int rsvnNumber) const
-{
-	Node* current = first;
-	bool found = false;
-	while (!found)
-	{
-		if (current->getReservationNumber() == rsvnNumber)
-		{
-			found = true;
-		}
-		else
-		{
-			current = current->getNext();
-		}
-	}
-	return current;
 }
 
 void Reservations::cancelReservation(int theReservationNumber)
@@ -77,17 +65,46 @@ void Reservations::cancelReservation(int theReservationNumber)
 	--count;
 }
 
-void Reservations::printReservation(int theReservationNumber,
-    const HikeList& theHikeList, const MemberList& theMemberList) const
+void Reservations::printReservation(int theReservationNumber, 
+	const HikeList& theHikeList, const MemberList& theMemberList) const
 {
 	Node* pNode = findReservation(theReservationNumber);
-	theHikeList.printByHikeName(pNode->getHikeName());
+	if (pNode == nullptr)
+	{
+		cerr << "This reservation does not exist.\n";
+	}
+	else
+	{
+		theHikeList.printByHikeName(pNode->getHikeName());
+		int point = theMemberList.getPoints(pNode->getMemberID());
+		if (point > 0)
+		{
+			cout << endl;
+			double discountPrice = static_cast<double>(point / 100);
+			cout << "\tDiscounted price using points: $"
+				<< theHikeList.getPrice(pNode->getHikeName()) - discountPrice
+				<< endl;
+		}
+	}
 	cout << endl;
-	int point = theMemberList.getPoints(pNode->getMemberID());
-	double discountPrice = static_cast<double>(point / 100);
-	cout << "\tDiscounted price using points: $" 
-		 << theHikeList.getPrice(pNode->getHikeName()) - discountPrice << endl
-		 << endl;
+}
+
+Node* Reservations::findReservation(int rsvnNumber) const
+{
+	Node* current = first;
+	bool found = false;
+	while (!found && current != nullptr)
+	{
+		if (current->getReservationNumber() == rsvnNumber)
+		{
+			found = true;
+		}
+		else
+		{
+			current = current->getNext();
+		}
+	}
+	return current;
 }
 
 void Reservations::clearList()

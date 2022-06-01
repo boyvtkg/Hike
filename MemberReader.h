@@ -1,5 +1,6 @@
 /*
 	Demon
+
 	Pham, Thanh
 
 	Spring 2022
@@ -21,8 +22,8 @@ const string MEMBERS_FILE = "members_database.txt";
 void createMemberList(ifstream& infile, MemberList& memberList)
 {
 	string firstName,
-		lastName;
-	int points;
+		   lastName;
+	int points = 0;
 
 	while (!infile.eof())
 	{

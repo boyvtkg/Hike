@@ -1,38 +1,34 @@
 /*
     Demon
+
     Pham, Thanh
 
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US
 */
+
 #include "Hike.h"
 
 using namespace std;
 
-ostream& operator<<(ostream& out, const Hike& myObj)
+ostream& operator<<(ostream& out, const Hike& obj)
 {
     string difficulty;
-    if (myObj.getHikeDifficulty() == 'e')
+    if (obj.getHikeDifficulty() == 'e')
         difficulty = "easy";
-    else if (myObj.getHikeDifficulty() == 'm')
+    else if (obj.getHikeDifficulty() == 'm')
         difficulty = "moderate";
-    else if (myObj.getHikeDifficulty() == 's')
+    else if (obj.getHikeDifficulty() == 's')
         difficulty = "strenuous";
-    out << '\t' << myObj.hikeName << " (" << myObj.location << ")\n"
+    out << '\t' << obj.hikeName << " (" << obj.location << ")\n"
         << "\t  Difficulty: " << difficulty << '\n'
-        << "\t  Duration: " << myObj.duration << " day(s)\n";
+        << "\t  Duration: " << obj.duration << " day(s)\n";
     return out;
 }
 
-Hike::Hike()
-{
-    duration = 0;
-    difficulty = 'e';
-}
-
-Hike::Hike(const string& newLocation, const string& newHikeName,
-            int newDuration, char newDifficulty)
+Hike::Hike(const string& newLocation, const string& newHikeName, 
+    int newDuration, char newDifficulty)
 {
     location = newLocation;
     hikeName = newHikeName;
@@ -58,4 +54,9 @@ int Hike::getHikeDuration() const
 char Hike::getHikeDifficulty() const
 {
     return difficulty;
+}
+
+bool Hike::operator<(const Hike& paramObj) const
+{
+    return (location < paramObj.location);
 }

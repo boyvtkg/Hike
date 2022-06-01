@@ -1,5 +1,6 @@
 /*
 	Demon
+
 	Pham, Thanh
 
 	Spring 2022
@@ -20,7 +21,7 @@ const string RESERVATIONS_FILE = "reservations_database.txt";
 
 void createReservationList(ifstream& infile, Reservations& reservationsList)
 {
-	int memberID;
+	int memberID = 0;
 	string hikeName;
 
 	while (!infile.eof())

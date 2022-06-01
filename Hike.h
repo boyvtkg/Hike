@@ -1,38 +1,35 @@
 /*
     Demon
+
     Pham, Thanh
 
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US
 */
+
 #ifndef HIKE_H
 #define HIKE_H
 
-#include <string>
 #include <iostream>
+#include <string>
 
-/**
- * Interface of the class Hike.
- */
 class Hike
 {
-
-    friend std::ostream& operator<<(std::ostream& out, const Hike& myObj);
-
+    friend std::ostream& operator<<(std::ostream& out, const Hike& obj);
 public:
-    // Default constructor
-    Hike();
+    Hike() : duration(0), difficulty('e') {}
+    Hike(const std::string& newLocation, const std::string& newHikeName, 
+        int newDuration, char newDifficulty);
 
-    Hike(const std::string& newLocation, const std::string& newHikeName,
-            int newDuration, char newDifficulty);
-
-    // Accessor Function
     std::string getHikeLocation() const;
     std::string getHikeName() const;
     int getHikeDuration() const;
     char getHikeDifficulty() const;
 
+    bool operator<(const Hike& paramObj) const;
+
+    ~Hike() {}
 private:
     std::string location;
     std::string hikeName;

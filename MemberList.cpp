@@ -1,35 +1,33 @@
 /*
     Demon
+
     Pham, Thanh
 
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US
 */
+
 #include "MemberList.h" 
+
 #include <iostream>
 #include <algorithm>
 
 using namespace std;
-
-const int FIRST_MEMBER_ID_NUMBER = 111;
-
-bool operator<(const Member& firstObj, const Member& secondObj)
-{
-    return (firstObj.getID() < secondObj.getID());
-}
 
 MemberList::MemberList()
 {
     listOfMember = new set<Member>;
 }
 
-void MemberList::addMember(const string& firstName, const string& lastName)
+void MemberList::addMember(const string& firstName, 
+    const string& lastName)
 {
     Member newMember(firstName, lastName);
+    int memberID = FIRST_MEMBER_ID_NUMBER;
     if (listOfMember->empty())
     {
-        newMember.setID(FIRST_MEMBER_ID_NUMBER);
+        newMember.setID(memberID);
     }
     else
     {
@@ -38,14 +36,15 @@ void MemberList::addMember(const string& firstName, const string& lastName)
     listOfMember->insert(newMember);
 }
 
- void MemberList::addMember(const string& firstName, const string& lastName, int points)
+ void MemberList::addMember(const string& firstName, 
+     const string& lastName, int points)
  {
      Member newMember(firstName, lastName);
      newMember.addPoints(points);
-
+     int memberID = FIRST_MEMBER_ID_NUMBER;
      if (listOfMember->empty())
      {
-         newMember.setID(FIRST_MEMBER_ID_NUMBER);
+         newMember.setID(memberID);
      }
      else
      {
@@ -61,16 +60,17 @@ void MemberList::addMember(const string& firstName, const string& lastName)
 
  int MemberList::getPoints(int searchedID) const
  {
-     auto iter = find_if(listOfMember->begin(), listOfMember->end(), [& searchedID](const auto& elem)
-                        {return elem.getID() == searchedID;});
+     auto iter = find_if(listOfMember->begin(), listOfMember->end(),
+         [& searchedID](const auto& elem) 
+         {return elem.getID() == searchedID;});
      return iter->getPoints();
  }
 
 void MemberList::printMember(int searchedID, const string& seachedLastName)
 {
-    auto iter = find_if(listOfMember->begin(), listOfMember->end(), [& searchedID](const auto& elem)
-                        {return elem.getID() == searchedID;});
-
+    auto iter = find_if(listOfMember->begin(), listOfMember->end(),
+        [& searchedID](const auto& elem) 
+        {return elem.getID() == searchedID;});
     if (iter->getLastName() == seachedLastName)
     {
         iter->printMember();
@@ -86,7 +86,6 @@ void MemberList::printMember(int searchedID, const string& seachedLastName)
 
  MemberList::~MemberList()
  {
-     clearList();
      delete listOfMember;
      listOfMember = nullptr;
  }

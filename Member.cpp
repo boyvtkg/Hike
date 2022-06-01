@@ -1,21 +1,19 @@
 /*
     Demon
+
     Pham, Thanh
 
     Spring 2022
     CS A250 - C++ 2
     Project: Hiking in the US
 */
+
 #include "Member.h"
+
 #include <iostream>
 
 using namespace std;
 
-Member::Member()
-{
-    memberID = 0;
-    points = 0;
-}
 Member::Member(const string& newFirstName, const string& newLastName)
 {
     firstName = newFirstName;
@@ -47,6 +45,11 @@ string Member::getLastName() const
 int Member::getPoints() const
 {
     return points;
+}
+
+bool Member::operator<(const Member& paramObj) const
+{
+    return (memberID < paramObj.memberID);
 }
 
 void Member::printMember() const
